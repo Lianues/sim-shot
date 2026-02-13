@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>联机3D世界 MVP</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="game-container"></div>
+
+      <div id="hud" aria-live="polite">
+        <div id="hp-card">生命值 <span id="hp-value">100</span></div>
+        <div id="status-text"></div>
+        <div id="control-tips">左键射击 · Shift 冲刺 · Space 跳跃</div>
+        <button id="sound-toggle-btn" type="button">🔊 音效：开</button>
+      </div>
+
+      <div id="crosshair" aria-hidden="true">
+        <span class="line horizontal"></span>
+        <span class="line vertical"></span>
+      </div>
+
+      <div id="damage-flash" aria-hidden="true"></div>
+
+      <div id="login-overlay" class="overlay">
+        <div class="login-card">
+          <h1>联机3D世界</h1>
+          <p>输入一个不重复的名字进入游戏</p>
+          <input id="name-input" type="text" maxlength="20" placeholder="请输入你的名字" />
+          <button id="join-btn">进入游戏</button>
+          <div id="login-error" class="error"></div>
+        </div>
+      </div>
+
+      <aside id="chat-panel">
+        <div id="chat-messages"></div>
+        <div class="chat-input-row">
+          <input id="chat-input" type="text" maxlength="120" placeholder="输入消息，回车发送" />
+          <button id="chat-send-btn">发送</button>
+        </div>
+      </aside>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
