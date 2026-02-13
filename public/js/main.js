@@ -248,8 +248,21 @@ function tryShoot() {
   gunKick = 1;
   sound.playShoot(true);
 
+  const origin = {
+    x: myPlayer.model.position.x,
+    y: myPlayer.model.position.y + 1.55,
+    z: myPlayer.model.position.z
+  };
+
   const direction = new THREE.Vector3();
   camera.getWorldDirection(direction);
+
+  spawnShotTracer({
+    fromId: myId,
+    origin,
+    direction: { x: direction.x, y: direction.y, z: direction.z },
+    hitId: null
+  });
 
   network.emit('shoot', {
     direction: {
@@ -429,7 +442,9 @@ network.on('playerRespawned', ({ id, position, rotation, health }) => {
 });
 
 network.on('shotFired', (data) => {
-  spawnShotTracer(data);
+  if (data.fromId !== myId) {
+    spawnShotTracer(data);
+  }
 
   if (data.hitId === myId && data.fromId !== myId) {
     sound.playShoot(false);
